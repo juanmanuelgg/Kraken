@@ -71,6 +71,7 @@ export class FileHelper {
 
   createFileIfDoesNotExist(path: string) {
     if (!fs.existsSync(path)) {
+      this.createFolderIfDoesNotExist(path);
       fs.openSync(path, 'w');
     }
   }
