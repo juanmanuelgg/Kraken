@@ -17,7 +17,7 @@ export class FeatureReader {
     return FeatureReader.singletonInstance;
   }
 
-  getFeatureFiles(): FeatureFile[] {
+  getFeatureFiles(desiredFeatureFile : string): FeatureFile[] {
     let currentDirectoryPath = process.cwd();
     let expectedFeaturesPath = `${currentDirectoryPath}/features`;
     if (!this.fileHelper.pathExists(expectedFeaturesPath)) {
@@ -27,7 +27,7 @@ export class FeatureReader {
     }
 
     let featuresInPath: string[] = this.fileHelper.featureFilesInPath(
-      expectedFeaturesPath
+      expectedFeaturesPath, desiredFeatureFile
     );
     return featuresInPath.map((featureFileName: string) => {
       return new FeatureFile(`${expectedFeaturesPath}/${featureFileName}`);

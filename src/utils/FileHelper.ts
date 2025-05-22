@@ -46,10 +46,11 @@ export class FileHelper {
     return fs.readdirSync(path);
   }
 
-  featureFilesInPath(path: string): string[] {
+  featureFilesInPath(path: string, desiredFeatureFile: string = ''): string[] {
     let filesInFeaturePath: string[] = this.filesInPath(path);
     return filesInFeaturePath.filter((fileName: string) => {
-      return fileName.match(/\.feature$/);
+      if (desiredFeatureFile !== '') return (fileName.match(/\.feature$/) && desiredFeatureFile.endsWith(fileName));
+      else return fileName.match(/\.feature$/);
     });
   }
 

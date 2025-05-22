@@ -7,9 +7,9 @@ import * as Constants from './utils/Constants';
 export class KrakenMobile {
   private scenariosQueue: TestScenario[];
 
-  constructor() {
+  constructor(desiredFeatureFile: string) {
     this.scenariosQueue = [];
-    this.buildScenariosQueue();
+    this.buildScenariosQueue(desiredFeatureFile);
     if(this.usesMultipleApks()) {
       this.checkIfApksArePresentIfRequired();
     } else {
@@ -21,8 +21,8 @@ export class KrakenMobile {
     this.executeNextScenario();
   }
 
-  private buildScenariosQueue() {
-    let features: FeatureFile[] = FeatureReader.instance().getFeatureFiles();
+  private buildScenariosQueue(desiredFeatureFile: string) {
+    let features: FeatureFile[] = FeatureReader.instance().getFeatureFiles(desiredFeatureFile);
     features.forEach((feature) => {
       this.scenariosQueue.push(
         new TestScenario(feature, this)

@@ -10,7 +10,9 @@ switch(action) {
     }
     case 'run': {
         const { KrakenMobile } = require('../lib/KrakenMobile');
-        let kraken = new KrakenMobile();
+        let desiredFeatureFile = '';
+        if ( process.argv.length > 3 ) desiredFeatureFile = process.argv[3] || '';
+        let kraken = new KrakenMobile(desiredFeatureFile);
         kraken.start();
         break;
     }
